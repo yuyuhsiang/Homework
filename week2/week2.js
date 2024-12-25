@@ -29,7 +29,7 @@ let posts = [];
 
             posts.unshift(post);
             updatePosts();
-            showBlogList();
+            BlogList();
         }
 
         function updatePosts() {
@@ -48,4 +48,4 @@ let posts = [];
             });
         }
 
-        showBlogList();
+        BlogList();
