@@ -19,7 +19,7 @@
 **作業詳情**
 1. [作業1](https://github.com/yuyuhsiang/Homework/tree/main/week1) : 上課跟著做
 ---
-2. [作業2](https://github.com/yuyuhsiang/Homework/tree/main/week2)
-3. [作業3](https://github.com/yuyuhsiang/Homework/tree/main/week3)
+2. [作業2](https://github.com/yuyuhsiang/Homework/tree/main/week2) &
+3. [作業3](https://github.com/yuyuhsiang/Homework/tree/main/week3) &
 4. [作業4](https://github.com/yuyuhsiang/Homework/tree/main/week4)
 因為寫專題是用flask所以不用deno做，題目要求主要功能基本完善，功能皆標示於各項README.md
