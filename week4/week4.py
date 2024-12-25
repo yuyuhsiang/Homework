@@ -105,6 +105,13 @@ def create_post():
         'date': post.date.strftime('%Y/%m/%d %H:%M:%S')
     })
 
+@app.route('/all')
+def overview():
+    all_posts = Post.query.order_by(Post.date.desc()).all()
+    users = {user.id: user.username for user in User.query.all()}
+    return render_template('all.html', posts=all_posts, users=users)
+
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

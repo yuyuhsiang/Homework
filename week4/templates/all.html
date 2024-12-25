@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>部落格總覽</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-header">
+        <h1>部落格總覽</h1>
+        <div class="nav-buttons">
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('main') }}" class="nav-button">我的部落格</a>
+            <a href="{{ url_for('logout') }}" class="logout-button">登出</a>
+            {% else %}
+            <a href="{{ url_for('login') }}" class="nav-button">登入</a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="posts-container">
+        {% for post in posts %}
+        <div class="post">
+            <div class="post-header">
+                <div class="post-title">{{ post.title }}</div>
+                <div class="post-author">作者：{{ users[post.user_id] }}</div>
+            </div>
+            <div class="post-content">{{ post.content }}</div>
+            <div class="post-date">{{ post.date.strftime('%Y/%m/%d %H:%M:%S') }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
