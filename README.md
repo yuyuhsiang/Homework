@@ -3,22 +3,19 @@
 欄位 | 內容
 -----|--------
 學期 | 113 學年上學期
-學生 |  吳佳泰
-學號末兩碼 | 20
+學生 |  張瑜翔
 教師 | [陳鍾誠](https://www.nqu.edu.tw/educsie/index.php?act=blog&code=list&ids=4)
 學校科系 | [金門大學資訊工程系](https://www.nqu.edu.tw/educsie/index.php)
 課程教材 | https://github.com/ccc112a/html2denojs
 
 ---
 
-## 關於期中作業 - [教室預約系統](https://github.com/taitaiwu/_ws/tree/master/Midterm_project)
 
-期中作業為一個**教室預約系統**的網站，包含首頁以及註冊、登入、教室清單、教室預約、歷史紀錄、管理共七個頁面，後端使用FastAPI完成。作業詳情請見 [README.md](Midterm_Project/README.md) 檔案
 
 ---
 
 ## 關於期末作業 
-全部作業都有完成，使用Javascript和Deno完成
+全部作業都有完成，只使用幾次deno後轉去flask來建站
 **作業詳情**
 1. [作業1](https://github.com/yuyuhsiang/Homework/tree/main/week1) : 上課跟著做
 ---
