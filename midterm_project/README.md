@@ -1,5 +1,5 @@
 # Project midterm 期中作業： 請寫一個網站，或做一份網站相關的報告/程式/專案/學習筆記/作品
-<h1>
+<h2>
 (期中)使用cv2來做臉部辨識，通過即給一份QRCode來給使用者加入line好友<br>
 使用linebotapi來架構line相關資訊，主要使用爬蟲(爬取ptt、中央氣象資訊)<br>
 程式順序: FaceCheck1 ==> FaceCheck2 ==> bot<br>
