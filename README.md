@@ -22,7 +22,6 @@
 全部作業都有完成，只使用幾次deno後轉去flask來建站<br>
 **作業詳情**
 1. [作業1](https://github.com/yuyuhsiang/Homework/tree/main/week1) : 上課跟著做
----
 2. [作業2](https://github.com/yuyuhsiang/Homework/tree/main/week2) &
 3. [作業3](https://github.com/yuyuhsiang/Homework/tree/main/week3) &
 4. [作業4](https://github.com/yuyuhsiang/Homework/tree/main/week4) : 
