@@ -1,17 +1,19 @@
+<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>部落格天地</title>
-    <link rel="stylesheet" href="week2.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='week2.css') }}">
 </head>
 <body>
     <div id="blogList">
         <h1>部落格天地</h1>
-        <button onclick="CreatePost()">新增貼文</button>
+        <button onclick="showCreatePost()">新增貼文</button>
         <div id="posts"></div>
     </div>
+
     <div id="createPost">
         <h1>新增貼文</h1>
         <div class="form-group">
@@ -22,10 +24,10 @@
             <label for="content">內容：</label>
             <textarea id="content" required></textarea>
         </div>
-        <button class="back-button" onclick="BlogList()">返回</button>
+        <button class="back-button" onclick="showBlogList()">返回</button>
         <button onclick="addPost()">發布貼文</button>
     </div>
 
-    <script src="week2.js"></script>
+    <script src="{{ url_for('static', filename='week2.js') }}"></script>
 </body>
 </html>
