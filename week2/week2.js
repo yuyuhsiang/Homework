@@ -1,11 +1,11 @@
 let posts = [];
 
-        function showCreatePost() {
+        function CreatePost() {
             document.getElementById('blogList').style.display = 'none';
             document.getElementById('createPost').style.display = 'block';
         }
 
-        function showBlogList() {
+        function BlogList() {
             document.getElementById('blogList').style.display = 'block';
             document.getElementById('createPost').style.display = 'none';
             document.getElementById('title').value = '';
