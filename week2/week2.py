@@ -5,7 +5,6 @@ import json
 
 app = Flask(__name__)
 
-# 用來儲存貼文的列表
 posts = []
 
 @app.route('/')

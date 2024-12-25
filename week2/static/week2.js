@@ -66,7 +66,6 @@ function updatePosts(posts) {
     });
 }
 
-// 初始化載入貼文
 document.addEventListener('DOMContentLoaded', () => {
     loadPosts();
     showBlogList();
