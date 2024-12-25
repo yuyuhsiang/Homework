@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人臉辨識系統</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: '微軟正黑體', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .container {
+            margin-top: 20px;
+        }
+        
+        .video-container {
+            margin: 20px 0;
+        }
+        
+        #video_feed {
+            max-width: 100%;
+            border: 2px solid #333;
+        }
+        
+        .controls {
+            margin: 20px 0;
+        }
+        
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+        
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        input[type="text"] {
+            padding: 8px;
+            font-size: 16px;
+            margin: 5px;
+        }
+        
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+        .success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        
+        .error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+    </style>
+</head>
+<body>
+    <h1>人臉辨識系統</h1>
+    
+    <div class="container">
+        <div class="video-container">
+            <img id="video_feed" src="{{ url_for('video_feed') }}" alt="視訊畫面">
+        </div>
+        
+        <div class="controls">
+            <div id="register-controls">
+                <input type="text" id="name" placeholder="請輸入姓名">
+                <button id="start-capture">開始註冊</button>
+            </div>
+            
+            <div id="verify-controls">
+                <button id="verify">驗證身份</button>
+            </div>
+        </div>
+        
+        <div id="message" class="message" style="display: none;"></div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // 初始化相機
+            $.get('/init_camera');
+            
+            // 離開頁面時釋放相機
+            $(window).on('beforeunload', function() {
+                $.get('/release_camera');
+            });
+            
+            // 開始註冊
+            $('#start-capture').click(function() {
+                const name = $('#name').val().trim();
+                if (!name) {
+                    showMessage('請輸入姓名', false);
+                    return;
+                }
+                
+                $.ajax({
+                    url: '/start_capture',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ name: name }),
+                    success: function(response) {
+                        if (response.success) {
+                            showMessage('開始擷取人臉，請保持面對鏡頭', true);
+                            $('#start-capture').prop('disabled', true);
+                            $('#name').prop('disabled', true);
+                        } else {
+                            showMessage(response.message, false);
+                        }
+                    },
+                    error: function() {
+                        showMessage('發生錯誤，請稍後再試', false);
+                    }
+                });
+            });
+            
+            // 驗證身份
+            $('#verify').click(function() {
+                $.ajax({
+                    url: '/verify_face',
+                    method: 'POST',
+                    success: function(response) {
+                        if (response.success) {
+                            showMessage(`歡迎 ${response.name} 登入！`, true);
+                        } else {
+                            showMessage(response.message, false);
+                        }
+                    },
+                    error: function() {
+                        showMessage('驗證失敗，請稍後再試', false);
+                    }
+                });
+            });
+            
+            function showMessage(message, isSuccess) {
+                const messageDiv = $('#message');
+                messageDiv.text(message)
+                    .removeClass('success error')
+                    .addClass(isSuccess ? 'success' : 'error')
+                    .show();
+                
+                // 5秒後自動隱藏訊息
+                setTimeout(() => {
+                    messageDiv.hide();
+                    // 如果是成功註冊，重置按鈕和輸入框
+                    if (isSuccess && message.includes('開始擷取')) {
+                        $('#start-capture').prop('disabled', false);
+                        $('#name').prop('disabled', false);
+                        $('#name').val('');
+                    }
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -10,13 +10,17 @@
 
 ---
 
+# 期中作業 - [linebot對話機器人暨人臉辨識](https://github.com/yuyuhsiang/Homework/tree/main/midterm_project)
+
+期中作業為一個**linebot對話機器人**的網站，包含首頁以及註冊、登入。<br>
+作業詳情請見 [README.md](https://github.com/yuyuhsiang/Homework/blob/main/midterm_project/README.md) 檔案
 
 
 ---
 
 # 關於期末作業 
 全部作業都有完成，只使用幾次deno後轉去flask來建站<br>
-作業詳情
+**作業詳情**
 1. [作業1](https://github.com/yuyuhsiang/Homework/tree/main/week1) : 上課跟著做
 ---
 2. [作業2](https://github.com/yuyuhsiang/Homework/tree/main/week2) &
