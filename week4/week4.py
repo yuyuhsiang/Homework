@@ -106,7 +106,7 @@ def create_post():
     })
 
 @app.route('/all')
-def overview():
+def all():
     all_posts = Post.query.order_by(Post.date.desc()).all()
     users = {user.id: user.username for user in User.query.all()}
     return render_template('all.html', posts=all_posts, users=users)
