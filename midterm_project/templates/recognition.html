@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>人臉辨識系統 - 辨識模式</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: "Microsoft JhengHei", Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+        }
+        #video_feed {
+            margin: 20px 0;
+            max-width: 100%;
+            border: 2px solid #ccc;
+        }
+        #result {
+            margin: 20px 0;
+        }
+        .navigation {
+            margin-top: 20px;
+        }
+        button {
+            padding: 8px 20px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+        }
+        .modal-content {
+            position: relative;
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .close {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        #qr-code {
+            max-width: 200px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人臉辨識系統 - 辨識模式</h1>
+        <button onclick="startRecognition()" id="recognizeBtn">開始辨識</button>
+        <img id="video_feed" src="{{ url_for('video_feed_recognize') }}">
+        <div id="result">
+            <h2 id="recognized-name"></h2>
+        </div>
+        <div class="navigation">
+            <a href="{{ url_for('index') }}"><button>返回訓練頁面</button></a>
+        </div>
+    </div>
+
+    <div id="qrModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3>請掃描以下QR碼加入LINE機器人</h3>
+            <img id="qr-code" src="{{ url_for('static', filename='qr.png') }}" alt="QR Code">
+        </div>
+    </div>
+
+    <script>
+        let resultChecking;
+
+        function startRecognition() {
+            fetch('/start_recognition', {
+                method: 'POST',
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('recognizeBtn').disabled = true;
+                    resultChecking = setInterval(checkResult, 1000);
+                }
+            });
+        }
+
+        function checkResult() {
+            fetch('/recognition_result')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('recognized-name').textContent = `歡迎 ${data.name}！`;
+                    document.getElementById('recognizeBtn').disabled = false;
+                    clearInterval(resultChecking);
+                    document.getElementById('qrModal').style.display = 'block';
+                }
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('qrModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            let modal = document.getElementById('qrModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

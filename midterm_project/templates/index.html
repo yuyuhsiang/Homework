@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>人臉辨識系統 - 訓練模式</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: "Microsoft JhengHei", Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+        }
+        #video_feed {
+            margin: 20px 0;
+            max-width: 100%;
+            border: 2px solid #ccc;
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        button, input {
+            padding: 8px 20px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        #message {
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .navigation {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人臉辨識系統 - 訓練模式</h1>
+        <div class="controls">
+            <input type="text" id="name" placeholder="請輸入英文姓名">
+            <button onclick="startCapture()">開始訓練</button>
+        </div>
+        <img id="video_feed" src="{{ url_for('video_feed_train') }}">
+        <div id="message"></div>
+        <div class="navigation">
+            <a href="{{ url_for('recognition') }}"><button>前往辨識頁面</button></a>
+        </div>
+    </div>
+
+    <script>
+        function startCapture() {
+            const name = document.getElementById('name').value;
+            if (!name) {
+                showMessage('請輸入姓名', 'error');
+                return;
+            }
+
+            fetch('/start_capture', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: `name=${encodeURIComponent(name)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    showMessage('開始收集人臉資料', 'success');
+                } else {
+                    showMessage(data.message, 'error');
+                }
+            });
+        }
+
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = message;
+            messageDiv.style.color = type === 'error' ? 'red' : 'green';
+        }
+    </script>
+</body>
+</html>
