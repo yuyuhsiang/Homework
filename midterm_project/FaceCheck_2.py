@@ -19,6 +19,12 @@ class FaceRecognition:
         self.names = []
         self.recognized_name = None
 
+    def save_img(self, image, index):
+        """Save captured face image to the corresponding folder"""
+        if self.current_name:
+            filename = f'images/{self.current_name}/{index}.jpg'
+            cv2.imwrite(filename, image)
+
     def gen_frames(self, mode='train'):
         self.camera = cv2.VideoCapture(0)
         while True:
