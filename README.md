@@ -13,7 +13,7 @@
 # 期中作業 - [linebot對話機器人暨人臉辨識](https://github.com/yuyuhsiang/Homework/tree/main/midterm_project)
 
 期中作業為一個**linebot對話機器人**的網站，包含人臉辨識驗證、linebot對話機器人。<br>
-作業詳情請見 [README.md](https://github.com/yuyuhsiang/Homework/blob/main/midterm_project/README.md) 檔案
+作業詳情請見 [期中README.md](https://github.com/yuyuhsiang/Homework/blob/main/midterm_project/README.md) 檔案
 
 
 ---
