@@ -26,6 +26,4 @@
 3. [作業3](https://github.com/yuyuhsiang/Homework/tree/main/week3) &
 4. [作業4](https://github.com/yuyuhsiang/Homework/tree/main/week4) : 
 因為寫專題是用flask所以不用deno做，題目要求主要功能基本完善，功能皆標示於各項README.md<br>
-建議直接看作業4，功能為最完整<br>
-
-期末入口參考 : https://github.com/taitaiwu/_ws/blob/master/README.md
+建議直接看作業4，功能為最完整
